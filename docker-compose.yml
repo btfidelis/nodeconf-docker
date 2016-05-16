@@ -1,0 +1,17 @@
+nginx:
+  image: jwilder/nginx-proxy
+  ports:
+    - "80:80"
+  volumes:
+    - "/var/run/docker.sock:/tmp/docker.sock"
+
+nodeconf-app:
+  image: "node:4.4"
+  expose:
+    - "8888"
+  volumes:
+    - "./:/usr/src/app"
+  environment:
+    VIRTUAL_HOST: "demo.nodeconf"
+  working_dir: "/usr/src/app"
+  command: node index.js
